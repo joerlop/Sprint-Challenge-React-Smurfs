@@ -8,7 +8,8 @@ class SmurfForm extends Component {
     this.state = {
       name: '',
       age: '',
-      height: ''
+      height: '',
+      id: ""
     };
   }
 
@@ -34,7 +35,19 @@ class SmurfForm extends Component {
     this.setState({
       name: '',
       age: '',
-      height: ''
+      height: '',
+      id: ""
+    });
+  }
+
+  deleteSmurf = (event) => {
+    event.preventDefault();
+    axios.delete(`http://localhost:3333/smurfs/${this.state.id}`);
+    this.setState({
+      name: '',
+      age: '',
+      height: '',
+      id: ""
     });
   }
 
@@ -65,6 +78,15 @@ class SmurfForm extends Component {
             name="height"
           />
           <button type="submit">Add to the village</button>
+        </form>
+        <form onSubmit={this.deleteSmurf}>
+          <input
+            onChange={this.handleInputChange}
+            placeholder="id"
+            value={this.state.id}
+            name="id"
+          />
+          <button type="submit">Delete</button>
         </form>
       </div>
     );
